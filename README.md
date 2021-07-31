@@ -1,0 +1,2 @@
+# haskboard
+haskell dashboard project
