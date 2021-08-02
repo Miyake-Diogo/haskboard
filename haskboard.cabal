@@ -37,6 +37,7 @@ library
 executable haskboard-exe
   main-is: Main.hs
   other-modules:
+      SIR
       Paths_haskboard
   hs-source-dirs:
       app
