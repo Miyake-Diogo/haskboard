@@ -1,21 +1,18 @@
 module Main where
 
 import System.Environment
+
 import SIR (plotaSIR)
-
--- plotaSIR
--- plotaSantos
--- PlotaSP cidade
-
+import Santos (plotaSantos)
+import SP (plotaSP)
 
 parseArgs :: [String] -> IO ()
-parseArgs ["SIR"] = plotaSIR
-parseArgs ["Santos"] = print "Executar Santos"
-parseArgs ["SP", cidade] = print ("Executar SP com " ++ cidade)
-parseArgs _ = putStrLn "Use: stack run {SIR|Santos|SP cidade}"
-
+parseArgs ("SIR":_)       = plotaSIR
+parseArgs ("Santos":_)    = plotaSantos
+parseArgs ("SP":cidade:_) = plotaSP cidade
+parseArgs _               = error "Uso: stack run {SIR|SP cidade|Santos}"
 
 main :: IO ()
 main = do
-    args <- getArgs
-    parseArgs args
+  args <- getArgs
+  parseArgs args 
