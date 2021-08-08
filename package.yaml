@@ -24,6 +24,9 @@ dependencies:
 - hvega
 - text
 - split
+- threepenny-gui
+- data-default
+- filepath
 
 library:
   source-dirs: src

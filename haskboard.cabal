@@ -32,14 +32,20 @@ library
       src
   build-depends:
       base >=4.7 && <5
+    , data-default
+    , filepath
     , hvega
     , split
     , text
+    , threepenny-gui
   default-language: Haskell2010
 
 executable haskboard-exe
   main-is: Main.hs
   other-modules:
+      Dashboard
+      Paths
+      ReadCsv
       Santos
       SIR
       SP
@@ -49,10 +55,13 @@ executable haskboard-exe
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , data-default
+    , filepath
     , haskboard
     , hvega
     , split
     , text
+    , threepenny-gui
   default-language: Haskell2010
 
 test-suite haskboard-test
@@ -65,8 +74,11 @@ test-suite haskboard-test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , data-default
+    , filepath
     , haskboard
     , hvega
     , split
     , text
+    , threepenny-gui
   default-language: Haskell2010
