@@ -62,8 +62,8 @@ setup window = do
             # set UI.strokeStyle "gray"
             # set UI.fillStyle   (UI.htmlColor "black")
 
-        canvas # UI.strokeText dashboardNameInput (141,61)
-        canvas # UI.fillText   dashboardNameInput (140,60)
+        canvas # UI.strokeText "DashBoard Name" (141,61)
+        canvas # UI.fillText   "DashBoard Name" (140,60)
 
     -- Clear the canvas    
     on UI.click clear $ const $
@@ -74,4 +74,4 @@ setup window = do
     img <- UI.img # set UI.src url
 
     on UI.click drawLineChart $ const $ do
-        canvas # UI.drawLineChart img (80,120)
+        canvas # UI.drawImage img (120,120)
