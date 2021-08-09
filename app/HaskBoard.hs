@@ -16,14 +16,25 @@ main = startGUI defaultConfig
           -- , jsStatic     = Just "../wwwroot" -- root address
           } setup
 
+
+-- Insert a title for dashbaord
+greet :: [UI Element]
+greet =
+    [ UI.h1  #+ [string "My Haskboard"]
+    ]        
+
 -- canvas size for make dashboards          
 canvasWidth = 1024 
 canvasHeight = 768
 
 
+
 setup :: Window -> UI ()
 setup window = do
     return window # set title "HASKELLBOARD :: HASKELL DASHBOARDS"
+    
+    getBody window #+
+        [UI.div #. "wrap" #+ (greet)]
 
     canvas <- UI.canvas
         # set UI.height canvasHeight
@@ -33,14 +44,9 @@ setup window = do
 -- Buttons
 
     drawPieChart <- UI.button #+ [string "Insert pie chart!"]
-    removePieChart <- UI.button #+ [string "Remove pie chart!"]
     drawLineChart <- UI.button #+ [string "Insert line chart!"]
-    removeLineChart <- UI.button #+ [string "Remove line chart!"]
     drawHorizontalBarChart <- UI.button #+ [string "Insert horizaontal bar chart!"]
-    removeHorizontalBarChart <- UI.button #+ [string "Insert horizaontal bar chart!"]
     drawVerticalBarChart <- UI.button #+ [string "Insert vertical bar chart!"]
-    removeVerticalBarChart <- UI.button #+ [string "Insert vertical bar chart!"]
-
     clear     <- UI.button #+ [string "Clear the canvas."]
 
     dashboardNameInput <- UI.input # set (attr "placeholder") "Dashboard name"
@@ -48,30 +54,22 @@ setup window = do
 
     getBody window #+
         [ column [element canvas]
-        , element drawPieChart, element removePieChart
-        , element drawLineChart, element removeLineChart
-        , element drawHorizontalBarChart, element removeHorizontalBarChart
-        , element drawVerticalBarChart, element removeVerticalBarChart
-        , element clear, element dashboardNameInput, element insertDashboardNameButton
+        , element drawPieChart
+        , element drawLineChart
+        , element drawHorizontalBarChart
+        , element drawVerticalBarChart
+        , element clear
         ]
 
-    -- draw dashboard name
-    on UI.click insertDashboardNameButton $ const $ do
-        return canvas
-            # set UI.textFont    "50px sans-serif"
-            # set UI.strokeStyle "gray"
-            # set UI.fillStyle   (UI.htmlColor "black")
 
-        canvas # UI.strokeText "DashBoard Name" (141,61)
-        canvas # UI.fillText   "DashBoard Name" (140,60)
+
+    -- draw the Line Chart
+    url <- UI.loadFile "image/png" "static/SIR.png"
+    img <- UI.img # set UI.src url
+
+    on UI.click drawLineChart $ const $ do
+        canvas # UI.drawImage img (10,10)
 
     -- Clear the canvas    
     on UI.click clear $ const $
         canvas # UI.clearCanvas
-
-    -- draw the haskell logo
-    url <- UI.loadFile "image/png" "SIR.png"
-    img <- UI.img # set UI.src url
-
-    on UI.click drawLineChart $ const $ do
-        canvas # UI.drawImage img (120,120)

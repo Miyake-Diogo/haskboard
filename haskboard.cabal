@@ -43,9 +43,9 @@ library
 executable haskboard-exe
   main-is: Main.hs
   other-modules:
-      Dashboard
+      HaskBoard
+      ParseCSV
       Paths
-      ReadCsv
       Santos
       SIR
       SP
